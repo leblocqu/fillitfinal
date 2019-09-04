@@ -14,7 +14,7 @@ NAME	= fillit
 
 FILE	=	backtrack.c\
 			checker.c\
-			checker2.c\
+			init_checker.c\
 			main.c\
 			map.c\
 			tetriminos.c

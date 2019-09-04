@@ -51,9 +51,9 @@ int     try_pos(char **map, t_point point, t_tetri t, int size)
     dx = point.x - t.coord[0].x;                                           
     dy = point.y - t.coord[0].y;
     while (i < 4)                                                            
-    {    
+    {
 		if ((t.coord[i].y) + dy >= size || (t.coord[i].x) + dx >= size)
-			return (0);                                                      
+			return (0);                                              
         if (map[(t.coord[i].y) + dy][(t.coord[i].x) + dx] != '.' )
             return (0);                                                
         i++;                                                                 
@@ -89,10 +89,10 @@ void	affiche_map(char **map, int size)
 	 {
 		 while (j < size)
 		 {
-			printf("%c", map[i][j]);
+			ft_putchar(map[i][j]);
 			j++;
 		 }
-		 printf("\n");
+		 ft_putchar('\n');
 		 j = 0;
 		 i++;
 	 }

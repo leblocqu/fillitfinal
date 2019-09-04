@@ -28,7 +28,7 @@ t_tetri		*create_letter(t_tetri *t)
 	return (t);
 }
 
-static char		**delete(t_tetri t, char **map)
+char		**delete(t_tetri t, char **map)
 {
 	int i;
 	int j;
@@ -62,15 +62,9 @@ int		place(t_tetri *t, t_point point, int size, char **map, int index)
 			if (try_pos(map, point, t[index], size) == 1)
 			{
 				map = put_tetriminos(map, point, t, index);
-				// affiche_map(map, size);
-				// usleep(1);
-				// printf("\n");
 				if (place(t, point2, size, map, index + 1) == 1)
 					return (1);
 				map = delete(t[index], map);
-				// affiche_map(map, size);
-				// usleep(1);
-				// printf("\n");
 			}
 			if (point.x < size)
 				point.x++;
@@ -102,6 +96,7 @@ void		solve(t_tetri *t, int size, char **map)
 		size++;
 		point.x = 0;
 		point.y = 0;
+		free_tab(map, size);
 		map = create_map(size);
 	}
 	affiche_map(map, size);

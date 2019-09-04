@@ -81,5 +81,6 @@ int			ft_count_words(char *s, char c);
 long int	ft_strtol(char *line);
 int			ft_abs(int x);
 float		ft_power(int nb, int exp);
+int 		ft_sqrt(int nb);
 
 #endif

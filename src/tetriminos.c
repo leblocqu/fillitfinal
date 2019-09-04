@@ -28,47 +28,6 @@ int			count_tetris(char *s)
 	return (nb_tetri);
 }
 
-// t_tetri		*create_tetris(t_tetri *tetris, char **str)
-// {
-// 	int		index;
-// 	int 	i;
-// 	int		j;
-// 	int		k;
-// 	int		l;
-
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	l = 0;
-// 	index = 0;
-// 	tetris = ft_memalloc(sizeof(t_tetri) * (g_nb_tetris + 1));
-// 	while (index < g_nb_tetris)
-// 	{
-// 		while (str[k] != NULL)
-// 		{
-// 			while (str[k][l] != '\0')
-// 			{
-// 				while (str[k][l] != '\n')
-// 				{
-// 					tetris[index].tetri[i][j] = str[k][l];
-// 					j++;
-// 					l++;
-// 				}
-// 	printf("test\n");
-// 				tetris[index].tetri[i][j] = '\0';
-// 				j = 0;
-// 				i++;
-// 			}
-// 			l = 0;
-// 		}
-// 		k++;
-// 		index++;
-// 		i = 0;
-// 		j = 0;
-// 	}
-// 	return (tetris);
-// } 
-
 t_tetri		*create_tetris(t_tetri *tetris, char **str)
 {
 	int		index;
@@ -96,8 +55,8 @@ t_tetri		*create_tetris(t_tetri *tetris, char **str)
 			i++;
 			l++;
 		}
-		l = 0;
 		index++;
+		l = 0;
 		i = 0;
 		j = 0;
 	}

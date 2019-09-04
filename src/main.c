@@ -12,7 +12,7 @@
 
 #include "../includes/fillit.h"
 
-char	**fill_tab(char **tab, char *buf)
+char					**fill_tab(char **tab, char *buf)
 {
 	int	i;
 	int	j;
@@ -37,8 +37,42 @@ char	**fill_tab(char **tab, char *buf)
 		j++;
 		i++;
 	}
-	tab[j] = NULL;
 	return (tab);
+}
+
+static float		ft_sqrt(float nb)
+{
+	float	x;
+
+	x = 0;
+	while (x * x < nb)
+		x++;
+	return (x);
+}
+
+static int			get_map_size(void)
+{
+	int		square_size;
+	float	float_nb;
+
+	float_nb = ft_sqrt((float)(g_nb_tetris) * 4.0);
+	square_size = (int)float_nb;
+	if (square_size == float_nb)
+		return (square_size);
+	return (square_size);
+}
+
+void		free_tab(char **tab, int tab_size)
+{
+	int i;
+
+	i = 0;
+	while (i < tab_size)
+	{
+		ft_strdel(&tab[i]);
+		i++;
+	}
+	ft_strdel(tab);
 }
 
 void        aff(t_tetri *test, int c_tetris)
@@ -46,7 +80,6 @@ void        aff(t_tetri *test, int c_tetris)
     int i;
     int x;
     int y;
-
     i = 0;
     x = 0;
     y = 0;
@@ -70,13 +103,36 @@ void        aff(t_tetri *test, int c_tetris)
     }
 }
 
-int		main(int argc, char **argv)
+void	affiche_tab(char **tab)
 {
+	int i;
+	int j;
+
+	i = 0;
+	while (tab[i])
+	{
+		while (tab[i][j] != '\0')
+		{
+			printf("%c", tab[i][j]);
+			j++;
+		}
+		printf("\n");
+		j = 0;
+		i++;
+	}
+}
+
+int					main(int argc, char **argv)
+{
+	int			size;
 	char		**str;
 	t_tetri		*tetriminios;
+	char		**map;
 
 	str = NULL;
 	tetriminios = NULL;
+	size = get_map_size();
+	map = NULL;
 	if (argc != 2)
 	{
 		ft_putendl("error");
@@ -85,13 +141,13 @@ int		main(int argc, char **argv)
 	if ((str = init_checker(argv[1])) == NULL)
 	{
 		ft_putendl("error");
+		free_tab(str, g_nb_tetris + 1);
 		return (-1);
 	}
-	else
-		printf("that's good !\n");
 	tetriminios = create_tetris(tetriminios, str);
+	free_tab(str, g_nb_tetris + 1);
 	tetriminios = create_coord(tetriminios);
 	tetriminios = create_letter(tetriminios);
-	solve(tetriminios, 2, NULL);
+	solve(tetriminios, size, map);
 	return (0);
 }

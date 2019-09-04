@@ -38,8 +38,7 @@ char    		**put_tetriminos(char **map, t_point point, t_tetri *t, int nb_tetris)
 void	        affiche_map(char **map, int size);
 char			**init_checker(char *argv);
 int				line_checker(char *str);
-// int				check_char(char *str);
-// int				check_char2(char *str);
+int				check_char(char *str);
 int				check_shape(char *str);
 int				checker(char **tab);
 int				count_tetris(char *str);
@@ -50,8 +49,7 @@ t_tetri			*create_letter(t_tetri *tetri);
 void			free_split(char **str_split);
 void			solve(t_tetri *t, int size, char **map);
 char			**fill_tab(char **tab, char *buf);
-int				first_test(char *buf);
-int				check_char(char *s);
-int				check_line(char *s);
+int				test_init(char *buf);
+void			free_tab(char **tab, int tab_size);
 
 #endif
