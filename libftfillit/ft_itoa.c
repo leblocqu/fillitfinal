@@ -3,66 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/23 12:48:41 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/23 12:48:42 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/05/09 19:23:27 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/05/13 15:32:30 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		taille_str(long long int n)
+static int			len_n(long n)
 {
-	long long int	i;
+	int		taille;
 
-	i = 1;
-	if (n < 0)
-		n = n * -1;
-	while (n >= 10)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-static char		*rempli_str(char *str, long long int n, int len)
-{
-	int		debut;
-
-	str[len] = '\0';
-	len = len - 1;
+	taille = 0;
+	if (n == 0)
+		return (1);
 	if (n < 0)
 	{
-		n = n * -1;
-		debut = 1;
-		str[0] = '-';
+		n *= -1;
+		taille++;
 	}
-	else
-		debut = 0;
-	while (len >= debut)
+	while (n > 0)
 	{
-		str[len] = n % 10 + '0';
 		n = n / 10;
-		len--;
+		taille++;
 	}
-	return (str);
+	return (taille);
 }
 
-char			*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
-	char			*str;
-	int				len;
-	long long int	lln;
+	int		taille;
+	char	*str;
+	int		compt;
+	long	nb;
 
-	lln = n;
-	len = taille_str(lln);
-	if (lln < 0)
-		len = len + 1;
-	str = ft_strnew(len);
-	if (!str)
+	compt = 0;
+	nb = n;
+	taille = len_n(nb);
+	if (!(str = (char *)malloc(sizeof(char) * taille + 1)))
 		return (NULL);
-	str = rempli_str(str, lln, len);
+	if (n < 0)
+	{
+		str[0] = '-';
+		nb *= -1;
+		compt = 1;
+	}
+	str[taille] = '\0';
+	while (taille > compt)
+	{
+		str[taille - 1] = (nb % 10) + '0';
+		taille--;
+		nb = nb / 10;
+	}
 	return (str);
 }

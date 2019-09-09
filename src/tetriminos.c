@@ -14,8 +14,8 @@
 
 int			count_tetris(char *s)
 {
-	int i;
-	int nb_tetri;
+	int	i;
+	int	nb_tetri;
 
 	i = 0;
 	nb_tetri = 0;
@@ -28,19 +28,14 @@ int			count_tetris(char *s)
 	return (nb_tetri);
 }
 
-t_tetri		*create_tetris(t_tetri *tetris, char **str)
+t_tetri		*create_tetris2(t_tetri *tetris, char **str, int j, int l)
 {
-	int		index;
-	int 	i;
-	int		j;
-	int		l;
+	int index;
+	int i;
 
+	index = -1;
 	i = 0;
-	j = 0;
-	l = 0;
-	index = 0;
-	tetris = ft_memalloc(sizeof(t_tetri) * (g_nb_tetris + 1));
-	while (index < g_nb_tetris)
+	while (++index < g_nb_tetris)
 	{
 		while (str[index][l] != '\0')
 		{
@@ -55,49 +50,60 @@ t_tetri		*create_tetris(t_tetri *tetris, char **str)
 			i++;
 			l++;
 		}
-		index++;
 		l = 0;
 		i = 0;
 		j = 0;
 	}
 	return (tetris);
-} 
-
-t_tetri        *create_coordd(t_tetri *test, int j, int k)
-{
-    int index;
-    int i;
-
-    i = -1;
-    index = -1;
-    while (++index < g_nb_tetris)
-    {
-        while (++i < 4)
-        {
-            while (++j < 4)
-            {
-                if (test[index].tetri[i][j] == '#')
-                {
-                    test[index].coord[k].x = j;
-                    test[index].coord[k].y = i;
-                    k++;
-                }
-            }
-            j = -1;
-        }
-        i = -1;
-        k = 0;
-    }
-    return (test);
 }
 
-t_tetri        *create_coord(t_tetri *test)
+t_tetri		*create_tetris(t_tetri *tetris, char **str)
 {
-    int    j;
-    int k;
+	int	j;
+	int	l;
 
-    j = -1;
-    k = 0;
-    test = create_coordd(test,j, k);
-    return (test);
+	j = 0;
+	l = 0;
+	tetris = ft_memalloc(sizeof(t_tetri) * (g_nb_tetris + 1));
+	tetris = create_tetris2(tetris, str, j, l);
+	return (tetris);
+}
+
+t_tetri		*create_coordd(t_tetri *test, int j, int k)
+{
+	int	index;
+	int	i;
+
+	i = -1;
+	index = -1;
+	while (++index < g_nb_tetris)
+	{
+		while (++i < 4)
+		{
+			while (++j < 4)
+			{
+				if (test[index].tetri[i][j] == '#')
+				{
+					test[index].coord[k].x = j;
+					test[index].coord[k].y = i;
+					k++;
+				}
+			}
+			j = -1;
+		}
+		i = -1;
+		k = 0;
+	}
+	return (test);
+}
+
+t_tetri		*create_coord(t_tetri *test)
+{
+	int	j;
+	int	k;
+
+	j = -1;
+	k = 0;
+	test = create_coordd(test, j, k);
+	return (test);
 }

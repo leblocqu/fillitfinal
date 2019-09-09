@@ -17,6 +17,7 @@
 # include <fcntl.h>
 
 int g_nb_tetris;
+int g_size;
 # define BUFF_SIZE 4096
 
 typedef struct	s_point
@@ -32,9 +33,9 @@ typedef struct	s_tetri
 	t_point		coord[4];
 }				t_tetri;
 
-char			**create_map(int size);
+char			**create_map(char **map, int size);
 int     		try_pos(char **map, t_point point, t_tetri t, int size);
-char    		**put_tetriminos(char **map, t_point point, t_tetri *t, int nb_tetris);
+char    		**put_tetris(char **map, t_point point, t_tetri *t, int nb);
 void	        affiche_map(char **map, int size);
 char			**init_checker(char *argv);
 int				line_checker(char *str);
@@ -47,9 +48,10 @@ t_tetri        	*create_coordd(t_tetri *test, int j, int k);
 t_tetri       	*create_coord(t_tetri *test);
 t_tetri			*create_letter(t_tetri *tetri);
 void			free_split(char **str_split);
-void			solve(t_tetri *t, int size, char **map);
+void			solve(t_tetri *t, char **map);
 char			**fill_tab(char **tab, char *buf);
 int				test_init(char *buf);
 void			free_tab(char **tab, int tab_size);
+int				get_map_size(void);
 
 #endif

@@ -3,92 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 17:22:51 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/25 17:22:52 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/05/12 18:27:59 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/05/13 15:32:59 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		is_c(const char *str, int i, char c)
+static int		count_words(char const *s, char c)
 {
-	if (str[i] == c || str[i] == '\0')
-		return (1);
-	else
-		return (0);
-}
-
-static int		count_words(const char *str, char c)
-{
-	int i;
-	int len;
-
-	i = 0;
-	len = 0;
-	if (str[i] && is_c(str, i, c) == 0)
-		len++;
-	while (str[i + 1])
-	{
-		if (str[i + 1] && is_c(str, i, c) == 1
-			&& is_c(str, i + 1, c) == 0)
-			len++;
-		i++;
-	}
-	return (len + 1);
-}
-
-static char		*ft_strdupp(const char *src, int j, char c)
-{
-	char	*dup;
-	int		len;
 	int		i;
-	int		k;
+	int		res;
 
-	k = 0;
-	len = 0;
 	i = 0;
-	while (src[len + j] && !(is_c(src, len + j, c)))
-		len++;
-	if (!(dup = (char *)malloc(sizeof(dup) * (len + 1))))
-		return (NULL);
-	while (src[i + j] && !(is_c(src, i + j, c)))
+	res = 0;
+	if (s == NULL)
+		return (0);
+	while (s[i] != '\0')
 	{
-		dup[k] = src[i + j];
+		if (s[i] != c)
+		{
+			while (s[i + 1] != c && s[i + 1] != '\0')
+				i++;
+			res += 1;
+		}
 		i++;
-		k++;
 	}
-	dup[k] = '\0';
-	return (dup);
+	return (res);
 }
 
+static char		*create_words(char const *s, char c, int i)
+{
+	int		len;
+	int		j;
+	char	*str;
 
-char			**ft_strsplit(const char *s, char c)
+	len = 0;
+	j = i;
+	while (s[i] != c && s[i] != '\0')
+	{
+		i++;
+		len++;
+	}
+	if (!(str = (char *)malloc(sizeof(str) * len + 1)))
+		return (0);
+	len = 0;
+	while (s[j] != c && s[j] != '\0')
+	{
+		str[len] = s[j];
+		len++;
+		j++;
+	}
+	str[len] = '\0';
+	return (str);
+}
+
+char			**ft_strsplit(char const *s, char c)
 {
 	char	**res;
-	int		k;
+	int		nb_words;
 	int		i;
 	int		j;
 
-	i = -1;
-	k = 0;
+	nb_words = count_words(s, c);
 	j = 0;
-	if (!s)
+	i = 0;
+	if (!(res = (char **)malloc(sizeof(res) * (nb_words + 1))) || !s)
 		return (NULL);
-	if (!(res = (char **)malloc(sizeof(char*) * (count_words(s, c)))))
-		return (NULL);
-	while (s[++i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (s[0] && !(is_c(s, i, c)) && i == 0 && j == 0)
-			res[k++] = ft_strdupp(s, j, c);
-		if ((s[i] && is_c(s, i, c) && (!(is_c(s, i + 1, c)))))
+		if (s[i] != c)
 		{
-			j = i + 1;
-			res[k] = ft_strdupp(s, j, c);
-			k++;
+			res[j] = create_words(s, c, i);
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			j++;
 		}
+		else
+			i++;
 	}
-	res[k] = 0;
+	res[j] = NULL;
 	return (res);
 }

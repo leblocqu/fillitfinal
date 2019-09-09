@@ -12,7 +12,7 @@
 
 #include "../includes/fillit.h"
 
-char			**init_checker(char *argv)
+char		**init_checker(char *argv)
 {
 	int		fd;
 	int		ret;
@@ -26,6 +26,7 @@ char			**init_checker(char *argv)
 	while ((ret = read(fd, buf, BUFF_SIZE)) != 0)
 		buf[ret] = '\0';
 	g_nb_tetris = count_tetris(buf);
+	g_size = get_map_size();
 	if (g_nb_tetris > 26)
 		return (NULL);
 	if (!(tmp = (char**)malloc(sizeof(char *) * (g_nb_tetris + 1))))
@@ -38,7 +39,7 @@ char			**init_checker(char *argv)
 	return (tmp);
 }
 
-int		test_init(char *buf)
+int			test_init(char *buf)
 {
 	int x;
 	int y;

@@ -12,11 +12,11 @@
 
 #include "../includes/fillit.h"
 
-char					**fill_tab(char **tab, char *buf)
+char				**fill_tab(char **tab, char *buf)
 {
-	int	i;
-	int	j;
-	int	k;
+	int			i;
+	int			j;
+	int			k;
 
 	i = 0;
 	j = 0;
@@ -40,20 +40,10 @@ char					**fill_tab(char **tab, char *buf)
 	return (tab);
 }
 
-static float		ft_sqrt(float nb)
+int					get_map_size(void)
 {
-	float	x;
-
-	x = 0;
-	while (x * x < nb)
-		x++;
-	return (x);
-}
-
-static int			get_map_size(void)
-{
-	int		square_size;
-	float	float_nb;
+	int			square_size;
+	float		float_nb;
 
 	float_nb = ft_sqrt((float)(g_nb_tetris) * 4.0);
 	square_size = (int)float_nb;
@@ -62,9 +52,9 @@ static int			get_map_size(void)
 	return (square_size);
 }
 
-void		free_tab(char **tab, int tab_size)
+void				free_tab(char **tab, int tab_size)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (i < tab_size)
@@ -75,64 +65,13 @@ void		free_tab(char **tab, int tab_size)
 	ft_strdel(tab);
 }
 
-void        aff(t_tetri *test, int c_tetris)
-{
-    int i;
-    int x;
-    int y;
-    i = 0;
-    x = 0;
-    y = 0;
-    while (c_tetris >= 1)
-    {
-        while (x < 4)
-        {
-            while (y < 4)
-            {
-                printf("%c", test->tetri[x][y]);
-                y++;
-            }
-            x++;
-            y = 0;
-            printf("\n");
-        }
-        c_tetris--;
-        test++;
-        x = 0;
-        printf("\n\n");
-    }
-}
-
-void	affiche_tab(char **tab)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (tab[i])
-	{
-		while (tab[i][j] != '\0')
-		{
-			printf("%c", tab[i][j]);
-			j++;
-		}
-		printf("\n");
-		j = 0;
-		i++;
-	}
-}
-
 int					main(int argc, char **argv)
 {
-	int			size;
 	char		**str;
 	t_tetri		*tetriminios;
-	char		**map;
 
 	str = NULL;
 	tetriminios = NULL;
-	size = get_map_size();
-	map = NULL;
 	if (argc != 2)
 	{
 		ft_putendl("error");
@@ -141,13 +80,13 @@ int					main(int argc, char **argv)
 	if ((str = init_checker(argv[1])) == NULL)
 	{
 		ft_putendl("error");
-		free_tab(str, g_nb_tetris + 1);
+		free_tab(str, g_nb_tetris);
 		return (-1);
 	}
 	tetriminios = create_tetris(tetriminios, str);
-	free_tab(str, g_nb_tetris + 1);
+	free_tab(str, g_nb_tetris);
 	tetriminios = create_coord(tetriminios);
 	tetriminios = create_letter(tetriminios);
-	solve(tetriminios, size, map);
+	solve(tetriminios, NULL);
 	return (0);
 }

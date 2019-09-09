@@ -94,7 +94,7 @@ int		check_char(char *s)
 	return (1);
 }
 
-int				checker(char **tab)
+int		checker(char **tab)
 {
 	int i;
 

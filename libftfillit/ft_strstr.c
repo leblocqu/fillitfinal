@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 14:22:44 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/10 15:47:27 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/04/10 12:55:01 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/04/26 15:47:58 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *s1, const char *s2)
+char	*ft_strstr(const char *meule_de_foin, const char *aiguille)
 {
-	int		i;
-	int		j;
-	char	*pt;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	pt = 0;
-	if (s2[i] == '\0')
-		return ((char *)s1);
-	while (s1[i] != '\0')
+	str = 0;
+	if (aiguille[i] == '\0')
+		return ((char *)meule_de_foin);
+	while (meule_de_foin[i] != '\0')
 	{
-		if (s1[i] == s2[0])
+		if (meule_de_foin[i] == aiguille[0])
 		{
-			pt = (char *)s1 + i;
+			str = (char *)meule_de_foin + i;
 			j = 0;
-			while (s1[i + j] == s2[j])
+			while (meule_de_foin[i + j] == aiguille[j])
 			{
-				if (s2[j + 1] == '\0')
-					return (pt);
+				if (aiguille[j + 1] == '\0')
+					return (str);
 				j++;
 			}
-			pt = 0;
+			str = 0;
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }

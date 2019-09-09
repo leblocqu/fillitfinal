@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft-strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 14:07:02 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/12 14:07:05 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/04/23 17:29:16 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/05/09 19:13:02 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,9 @@
 
 char	*ft_strnew(size_t size)
 {
-	size_t	i;
-	char	*fresh;
+	char *src;
 
-	i = 0;
-	if (!(fresh = (char *)malloc(sizeof(char) * size + 1)))
+	if (!(src = malloc(size + 1)))
 		return (NULL);
-	while (i < size)
-	{
-		fresh[i] = '\0';
-		i++;
-	}
-	fresh[i] = '\0';
-	return (fresh);
+	return (ft_memset(src, '\0', size + 1));
 }

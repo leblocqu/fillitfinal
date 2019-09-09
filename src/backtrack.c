@@ -49,7 +49,19 @@ char		**delete(t_tetri t, char **map)
 	return (map);
 }
 
-int		place(t_tetri *t, t_point point, int size, char **map, int index)
+t_point		test_pos(t_point point)
+{
+	if (point.x < g_size)
+		point.x++;
+	else
+	{
+		point.x = 0;
+		point.y++;
+	}
+	return (point);
+}
+
+int			place(t_tetri *t, t_point point, char **map, int index)
 {
 	t_point point2;
 
@@ -57,22 +69,16 @@ int		place(t_tetri *t, t_point point, int size, char **map, int index)
 	point2.y = 0;
 	if (t[index].lettre != 0)
 	{
-		while (point.x * point.y < size * size)
+		while (point.x * point.y < g_size * g_size)
 		{
-			if (try_pos(map, point, t[index], size) == 1)
+			if (try_pos(map, point, t[index], g_size) == 1)
 			{
-				map = put_tetriminos(map, point, t, index);
-				if (place(t, point2, size, map, index + 1) == 1)
+				map = put_tetris(map, point, t, index);
+				if (place(t, point2, map, index + 1) == 1)
 					return (1);
 				map = delete(t[index], map);
 			}
-			if (point.x < size)
-				point.x++;
-			else
-			{
-				point.x = 0;
-				point.y++;
-			}
+			point = test_pos(point);
 		}
 		point.x = 0;
 		point.y = 0;
@@ -81,8 +87,7 @@ int		place(t_tetri *t, t_point point, int size, char **map, int index)
 	return (1);
 }
 
-
-void		solve(t_tetri *t, int size, char **map)
+void		solve(t_tetri *t, char **map)
 {
 	t_point point;
 	int		index;
@@ -90,14 +95,14 @@ void		solve(t_tetri *t, int size, char **map)
 	point.x = 0;
 	point.y = 0;
 	index = 0;
-	map = create_map(size);
-	while (place(t, point, size, map, index) == 0)
+	map = create_map(map, g_size);
+	while (place(t, point, map, index) == 0)
 	{
-		size++;
+		g_size++;
 		point.x = 0;
 		point.y = 0;
-		free_tab(map, size);
-		map = create_map(size);
+		free_tab(map, g_size);
+		map = create_map(map, g_size);
 	}
-	affiche_map(map, size);
+	affiche_map(map, g_size);
 }

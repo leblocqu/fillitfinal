@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 15:43:09 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/10 13:53:58 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/02/14 16:55:47 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/04/08 16:23:07 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-	size_t i;
-	size_t j;
+	int		i;
+	size_t	j;
 
 	i = 0;
 	j = 0;

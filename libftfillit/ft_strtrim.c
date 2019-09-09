@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/16 10:08:07 by behaudeg          #+#    #+#             */
-/*   Updated: 2019/04/16 10:08:09 by behaudeg         ###   ########.fr       */
+/*   Created: 2019/05/07 18:16:54 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/05/10 17:19:06 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*ft_strtrim(char const *s)
 		return (NULL);
 	min = 0;
 	while (s[min] != '\0'
-		&& (s[min] == ' ' || s[min] == '\n' || s[min] == '\t'))
+			&& (s[min] == ' ' || s[min] == '\n' || s[min] == '\t'))
 		min++;
 	max = ft_strlen(s);
 	while (min < max
-		&& (s[max - 1] == ' ' || s[max - 1] == '\n' || s[max - 1] == '\t'))
+			&& (s[max - 1] == ' ' || s[max - 1] == '\n' || s[max - 1] == '\t'))
 		max--;
 	if (min == max)
 		return (ft_strnew(1));

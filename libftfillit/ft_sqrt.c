@@ -5,28 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: leblocqu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/03 14:30:07 by leblocqu          #+#    #+#             */
-/*   Updated: 2019/09/03 14:30:09 by leblocqu         ###   ########.fr       */
+/*   Created: 2019/09/09 10:29:41 by leblocqu          #+#    #+#             */
+/*   Updated: 2019/09/09 10:29:42 by leblocqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_sqrt(int nb)
+float		ft_sqrt(float nb)
 {
-	int racine;
-	int sqrt;
+	float		x;
 
-	racine = 1;
-	sqrt = 0;
-	while (racine <= nb / 2)
-	{
-		sqrt = racine * racine;
-		if (sqrt == nb)
-		{
-			return (racine);
-		}
-		racine = racine + 1;
-	}
-	return (0);
+	x = 0;
+	while (x * x < nb)
+		x++;
+	return (x);
 }
