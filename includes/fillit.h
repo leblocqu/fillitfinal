@@ -34,18 +34,18 @@ typedef struct	s_tetri
 }				t_tetri;
 
 char			**create_map(char **map, int size);
-int     		try_pos(char **map, t_point point, t_tetri t, int size);
-char    		**put_tetris(char **map, t_point point, t_tetri *t, int nb);
-void	        affiche_map(char **map, int size);
-char			**init_checker(char *argv);
+int				try_pos(char **map, t_point point, t_tetri t, int size);
+char			**put_tetris(char **map, t_point point, t_tetri *t, int nb);
+void			affiche_map(char **map, int size);
+char			**init_checker(char *argv, char **str);
 int				line_checker(char *str);
 int				check_char(char *str);
 int				check_shape(char *str);
 int				checker(char **tab);
 int				count_tetris(char *str);
 t_tetri			*create_tetris(t_tetri *t, char **str);
-t_tetri        	*create_coordd(t_tetri *test, int j, int k);
-t_tetri       	*create_coord(t_tetri *test);
+t_tetri			*create_coordd(t_tetri *test, int j, int k);
+t_tetri			*create_coord(t_tetri *test);
 t_tetri			*create_letter(t_tetri *tetri);
 void			free_split(char **str_split);
 void			solve(t_tetri *t, char **map);

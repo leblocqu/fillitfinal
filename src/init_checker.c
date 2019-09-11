@@ -12,31 +12,30 @@
 
 #include "../includes/fillit.h"
 
-char		**init_checker(char *argv)
+char		**init_checker(char *argv, char **str)
 {
 	int		fd;
 	int		ret;
 	char	buf[BUFF_SIZE + 1];
-	char	**tmp;
 
 	if ((fd = open(argv, O_RDONLY)) == -1)
 		return (NULL);
 	ret = 1;
-	tmp = NULL;
 	while ((ret = read(fd, buf, BUFF_SIZE)) != 0)
 		buf[ret] = '\0';
 	g_nb_tetris = count_tetris(buf);
 	g_size = get_map_size();
 	if (g_nb_tetris > 26)
 		return (NULL);
-	if (!(tmp = (char**)malloc(sizeof(char *) * (g_nb_tetris + 1))))
+	if (!(str = ft_memalloc(sizeof(char *) * (g_nb_tetris + 1))))
 		return (NULL);
 	if (test_init(buf) == 0)
 		return (NULL);
-	tmp = fill_tab(tmp, buf);
-	if (checker(tmp) == 0)
+	str = fill_tab(str, buf);
+	if (checker(str) == 0)
 		return (NULL);
-	return (tmp);
+	close(fd);
+	return (str);
 }
 
 int			test_init(char *buf)
@@ -60,5 +59,7 @@ int			test_init(char *buf)
 		}
 		x++;
 	}
+	if (buf[x - 1] == '.' || buf[x - 1] == '#')
+		return (0);
 	return (1);
 }

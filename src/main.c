@@ -21,7 +21,7 @@ char				**fill_tab(char **tab, char *buf)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (j < count_tetris(buf))
+	while (j < g_nb_tetris)
 	{
 		tab[j] = (char*)malloc(sizeof(char) * 20 + 1);
 		if (tab[j] == NULL)
@@ -37,6 +37,7 @@ char				**fill_tab(char **tab, char *buf)
 		j++;
 		i++;
 	}
+	tab[j] = NULL;
 	return (tab);
 }
 
@@ -65,6 +66,34 @@ void				free_tab(char **tab, int tab_size)
 	ft_strdel(tab);
 }
 
+void        aff(t_tetri *test, int c_tetris)
+{
+    int i;
+    int x;
+    int y;
+    i = 0;
+    x = 0;
+    y = 0;
+    while (c_tetris >= 1)
+    {
+        while (x < 4)
+        {
+            while (y < 4)
+            {
+                printf("%c", test->tetri[x][y]);
+                y++;
+            }
+            x++;
+            y = 0;
+            printf("\n");
+        }
+        c_tetris--;
+        test++;
+        x = 0;
+        printf("\n\n");
+    }
+}
+
 int					main(int argc, char **argv)
 {
 	char		**str;
@@ -77,16 +106,17 @@ int					main(int argc, char **argv)
 		ft_putendl("error");
 		return (-1);
 	}
-	if ((str = init_checker(argv[1])) == NULL)
+	if ((str = init_checker(argv[1], str)) == NULL)
 	{
 		ft_putendl("error");
-		free_tab(str, g_nb_tetris);
+		// free_tab(str, g_nb_tetris + 1);
 		return (-1);
 	}
 	tetriminios = create_tetris(tetriminios, str);
-	free_tab(str, g_nb_tetris);
+	free_tab(str, g_nb_tetris + 1);
 	tetriminios = create_coord(tetriminios);
 	tetriminios = create_letter(tetriminios);
+	// aff(tetriminios, g_nb_tetris);
 	solve(tetriminios, NULL);
 	return (0);
 }

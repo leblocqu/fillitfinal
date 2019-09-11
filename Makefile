@@ -6,7 +6,7 @@
 #    By: behaudeg <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/28 10:34:24 by behaudeg          #+#    #+#              #
-#    Updated: 2019/06/28 10:34:26 by behaudeg         ###   ########.fr        #
+#    Updated: 2019/09/09 15:26:16 by leblocqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ INCLUDE	= includes/fillit.h \
 .SILENT:
 
 $(NAME): $(OBJ)
-	gcc -Wall -Werror -Wextra $(OBJ) -I includes libftfillit/libft.a -o $(NAME)
+	gcc -g -Wall -Werror -Wextra $(OBJ) -I includes libftfillit/libft.a -o $(NAME)
 ./%.o: src/%.c
-	gcc -Wall -Wextra -Werror -c $< -o $@
+	gcc -g -Wall -Wextra -Werror -c $< -o $@
 
 clean:
 	/bin/rm -rf *.o
