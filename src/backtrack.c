@@ -105,4 +105,5 @@ void		solve(t_tetri *t, char **map)
 		map = create_map(map, g_size);
 	}
 	affiche_map(map, g_size);
+	free_tab(map, g_size + 1);
 }

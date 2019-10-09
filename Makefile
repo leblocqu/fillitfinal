@@ -35,11 +35,9 @@ $(NAME): $(OBJ)
 
 clean:
 	/bin/rm -rf *.o
-	printf '\033[31m[ ✔ ] %s\n\033[0m' "Clean"
 
 fclean: clean
 	/bin/rm -f $(NAME)
-	printf '\033[31m[ ✔ ] %s\n\033[0m' "Fclean"
 
 re: fclean all
 
